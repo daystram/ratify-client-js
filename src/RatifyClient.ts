@@ -7,7 +7,14 @@ import { IAPIClient } from "./oauth/IAPIClient";
 import { ITokenStorage } from "./storage/ITokenStorage";
 import { User } from "./User";
 import { RatifyAPIClient } from "./oauth/RatifyAPIClient";
-import { ACCESS_TOKEN, KEY_TOKEN, ID_TOKEN, KEY_STATE, KEY_CODE } from "./constants";
+import {
+  ACCESS_TOKEN,
+  ID_TOKEN,
+  EXPIRE_DATE,
+  KEY_TOKEN,
+  KEY_STATE,
+  KEY_CODE,
+} from "./constants";
 
 export interface RatifyClientOptions {
   clientId: string;
@@ -28,7 +35,11 @@ export class RatifyClient {
   }
 
   isAuthenticated(): boolean {
-    return this.getToken(ACCESS_TOKEN) !== "";
+    return this.getToken(ACCESS_TOKEN) !== "" && this._accessTokenValid();
+  }
+
+  _accessTokenValid(): boolean {
+    return new Date(this.getToken(EXPIRE_DATE)) > new Date();
   }
 
   getToken(tokenKey: string): string {
@@ -73,6 +84,9 @@ export class RatifyClient {
         /* eslint-enable @typescript-eslint/camelcase */
       })
       .then((response) => {
+        response.data[EXPIRE_DATE] = new Date(
+          new Date().getTime() + response.data.expires_in * 1000
+        );
         this.storageManager.setItem(KEY_TOKEN, JSON.stringify(response.data));
         return response;
       });
