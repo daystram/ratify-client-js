@@ -1,0 +1,17 @@
+{
+  "name": "@daystram/ratify-client",
+  "version": "1.0.0",
+  "description": "Ratify OAuth Client",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daystram/ratify-client-js.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daystram/ratify-client-js/issues"
+  },
+  "homepage": "https://github.com/daystram/ratify-client-js#readme"
+}
