@@ -8,7 +8,10 @@
     "type": "git",
     "url": "git+https://github.com/daystram/ratify-client-js.git"
   },
-  "author": "",
+  "author": {
+    "name": "Danny August Ramaputra",
+    "email": "daystram@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/daystram/ratify-client-js/issues"
