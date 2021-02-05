@@ -48,9 +48,16 @@ export class RatifyClient {
     );
   }
 
-  getUser(): User | null {
+  getUser(): User {
     if (this.isAuthenticated()) return jwtDecode(this.getToken(ID_TOKEN));
-    return null;
+    return {
+      sub: "",
+      given_name: "",
+      family_name: "",
+      preferred_username: "",
+      is_superuser: false,
+      created_at: 0
+    };
   }
 
   reset() {
